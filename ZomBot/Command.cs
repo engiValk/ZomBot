@@ -25,7 +25,7 @@ namespace ZomBot
                         AdminCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user ,SplitString[1]);
                     } if (AuthorObject.authorRank == "moderator" || AuthorObject.authorRank == "admin" || AuthorObject.authorRank == "servmod")
                     {
-                        ModeratorCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user, SplitString[1]);
+                        ModeratorCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user, SplitString.Skip(1).ToArray(), SplitString[1]);
                     } if (AuthorObject.authorRank == "server" || AuthorObject.authorRank == "admin" || AuthorObject.authorRank == "servmod")
                     {
                         ServerCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user, SplitString[1]);
@@ -38,7 +38,7 @@ namespace ZomBot
                         AdminCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user);
                     } if (AuthorObject.authorRank == "moderator" || AuthorObject.authorRank == "admin" || AuthorObject.authorRank == "servmod")
                     {
-                        ModeratorCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user);
+                        ModeratorCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user, SplitString);
                     } if (AuthorObject.authorRank == "server" || AuthorObject.authorRank == "admin" || AuthorObject.authorRank == "servmod")
                     {
                         ServerCommandDefinitions.CommandList(SplitString[0], _channel, _client, _user);

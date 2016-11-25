@@ -9,7 +9,8 @@ namespace ZomBot
 {
     class ModeratorCommandDefinitions
     {
-        internal static void CommandList(string _command, Channel _channel, DiscordClient _client, User _user, string _parameter = "100")
+        static Channel _storedChannel = null;
+        internal static void CommandList(string _command, Channel _channel, DiscordClient _client, User _user, string[] _splitArray, string _parameter = "100")
         {
             switch (_command)
             {
@@ -17,6 +18,8 @@ namespace ZomBot
                     _channel.SendMessage("Command: !modtest: Tests if the user has mod permissions.");
                     _channel.SendMessage("Command: !delete: Deletes messages in the channel, using parameter to declare a number of messages. Only works if you can normally delete a message there.");
                     _channel.SendMessage("Command: !userinfo + parameter: Posts user's info including date and time joined and last activity.");
+                    _channel.SendMessage("Command: !focus: Focusses the bot on the current channel");
+                    _channel.SendMessage("Command: !say (PM): Sends a message from the bot via a PM to the focussed channel");
                     break;
 
                 case "!modtest":
@@ -27,7 +30,7 @@ namespace ZomBot
                     Console.WriteLine(_channel.Users);
                     var userPermissions = _user.GetPermissions(_channel).ManageMessages;
                     Console.WriteLine("Admin" + userPermissions);
-                 int number = int.Parse(_parameter);
+                    int number = int.Parse(_parameter);
                     Message[] message = new Message[number];
                     message = _channel.DownloadMessages(number).Result;
                     if (userPermissions == true)
@@ -55,6 +58,18 @@ namespace ZomBot
                             _channel.SendMessage("Last Online: " + i.LastOnlineAt);
                         }
                     }
+                    break;
+
+                case "!focus":
+                    _storedChannel = _channel;
+                    Console.WriteLine("I stored the channel: " + _channel);
+                    Message[] newMessage = new Message[1];
+                    newMessage = _channel.DownloadMessages(1).Result;
+                    _channel.DeleteMessages(newMessage);
+                    break;
+
+                case "!say":
+                    _storedChannel?.SendMessage(string.Join(" ", _splitArray));
                     break;
             }
         }
