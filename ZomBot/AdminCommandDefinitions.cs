@@ -15,7 +15,7 @@ namespace ZomBot
             {
                 case "!help": //Help command. Lists all other commands.
                     Console.WriteLine("Admin asked for help.");
-                    _channel.SendMessage("Command: !exit: Exits the bot.");
+                    _channel.SendMessage("Command: !exit: Exits the bot.\n");
                     break;
                 case "!exit": //Exit Command. Closes the bot down.
                     Console.WriteLine("Client Shutting down.");

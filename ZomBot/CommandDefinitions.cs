@@ -14,11 +14,11 @@ namespace ZomBot
             switch (_command)
             {
                 case "!help": //Help command. Lists all other commands.
-                    _channel.SendMessage("Command: !author: Prints my creator.");
-                    _channel.SendMessage("Command: !trump + parameter: Makes me post a joke about trump and his wall.");
-                    _channel.SendMessage("Command: !image + parameter.filetype: Uploads a reaction image to chat.");
-                    _channel.SendMessage("Command: !dice: Rolls a d6.");
-                    _channel.SendMessage("Command: !noise: Makes a random noise.");
+                    _channel.SendMessage("Command: !author: Prints my creator.\n" +
+                                         "Command: !trump + parameter: Makes me post a joke about trump and his wall.\n" +
+                                         "Command: !image + parameter.filetype: Uploads a reaction image to chat.\n" +
+                                         "Command: !dice: Rolls a d6.\n" +
+                                         "Command: !noise: Makes a random noise.\n");
                     break;
 
                 case "!author": //Author Command. Prints who made the bot.
@@ -68,7 +68,7 @@ namespace ZomBot
                     }
 
                     noiseMaker.Close();
-                    break;
+                    break; 
             }
         }
     }

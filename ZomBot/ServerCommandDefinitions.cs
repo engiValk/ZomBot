@@ -13,7 +13,7 @@ namespace ZomBot
             switch (_command)
             {
                 case "!help": //Help command. Lists all other commands.
-                   _channel.SendMessage("Command: !servertest: Tests if the user has server permissions.");
+                   _channel.SendMessage("Command: !servertest: Tests if the user has server permissions.\n");
                     break;
                 case "!servertest":
                     _channel.SendMessage("Test passed");

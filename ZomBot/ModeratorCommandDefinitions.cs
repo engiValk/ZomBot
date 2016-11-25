@@ -15,11 +15,11 @@ namespace ZomBot
             switch (_command)
             {
                 case "!help": //Help command. Lists all other commands.
-                    _channel.SendMessage("Command: !modtest: Tests if the user has mod permissions.");
-                    _channel.SendMessage("Command: !delete: Deletes messages in the channel, using parameter to declare a number of messages. Only works if you can normally delete a message there.");
-                    _channel.SendMessage("Command: !userinfo + parameter: Posts user's info including date and time joined and last activity.");
-                    _channel.SendMessage("Command: !focus: Focusses the bot on the current channel");
-                    _channel.SendMessage("Command: !say (PM): Sends a message from the bot via a PM to the focussed channel");
+                    _channel.SendMessage("Command: !modtest: Tests if the user has mod permissions.\n" +
+                                         "Command: !delete: Deletes messages in the channel, using parameter to declare a number of messages. Only works if you can normally delete a message there.\n" +
+                                         "Command: !userinfo + parameter: Posts user's info including date and time joined and last activity.\n" +
+                                         "Command: !focus: Focusses the bot on the current channel.\n" +
+                                         "Command: !say (PM): Sends a message from the bot via a PM to the focussed channel.\n");
                     break;
 
                 case "!modtest":
