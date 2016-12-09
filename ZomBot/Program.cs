@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 using Discord;
+using ZomBot.Steam;
 
 namespace ZomBot
 {
@@ -16,6 +17,8 @@ namespace ZomBot
             ///Initilize the client
             var _client = new DiscordClient();
             StreamReader apifile = File.OpenText("api.txt");
+            SteamConnection.Connect();
+            Console.WriteLine("Connected to steam.");
             _client.MessageReceived += (s, e) => {
                 if (e.Message.IsMentioningMe())
                     ClientMentioned(s, e);

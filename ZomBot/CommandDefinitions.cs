@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Discord;
+using ZomBot.Steam;
+
 namespace ZomBot
 {
     class CommandDefinitions
@@ -68,7 +70,11 @@ namespace ZomBot
                     }
 
                     noiseMaker.Close();
-                    break; 
+                    break;
+
+                case "!teststeam":
+                    SteamConnection.testFunction(_parameter, _channel, _client, _user);
+                    break;
             }
         }
     }
