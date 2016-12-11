@@ -10,6 +10,8 @@ using PortableSteam.Interfaces;
 using Discord;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Xml;
+using System.IO;
 
 namespace ZomBot.Steam
 {
@@ -17,19 +19,15 @@ namespace ZomBot.Steam
     {
         public static void Connect()
         {
-            SteamWebAPI.SetGlobalKey("121DBEF14537D73A0ED2B9612FDEC3EA");
         }
 
         public static void testFunction(string _parameter, Channel _channel, DiscordClient _client, User _user)
         {
-            var steamIdentity = SteamIdentity.FromSteamID(76561198019373573);
+            var steamIdentity = SteamIdentity.FromSteamID(Convert.ToInt64(_parameter));
             string steamUserVanity = SteamWebAPI.General().ISteamUser().ResolveVanityURL(_parameter).GetResponseString();
-            string friendsList = SteamWebAPI.General().ISteamUser().GetFriendList(steamIdentity, RelationshipType.Friend).GetResponseString();
-            //JToken token = JObject.Parse(friendsList);
-            //long steamID = (long)token.SelectToken("steamid");
-            dynamic results = JsonConvert.DeserializeObject<dynamic>(friendsList);
+            string friendsList = SteamWebAPI.General().ISteamUser().GetFriendList(steamIdentity, RelationshipType.Friend).GetResponseString(RequestFormat.XML);
             _channel.SendMessage(steamUserVanity);
-            _channel.SendMessage("Steam ID: " + results.steamid);
+            _channel.SendMessage("Steam ID: " + friendsList);
         }
     }
 }
