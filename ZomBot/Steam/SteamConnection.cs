@@ -19,6 +19,8 @@ namespace ZomBot.Steam
     {
         public static void Connect()
         {
+            StreamReader steamapifile = File.OpenText("steamapi.txt");
+            SteamWebAPI.SetGlobalKey(steamapifile.ReadToEnd());
         }
 
         public static void testFunction(string _parameter, Channel _channel, DiscordClient _client, User _user)
