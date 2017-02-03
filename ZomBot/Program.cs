@@ -14,7 +14,7 @@ namespace ZomBot
     {
         static void Main(string[] args)
         {
-            ///Initilize the client
+            //Initilize the client
             var _client = new DiscordClient();
             StreamReader apifile = File.OpenText("api.txt");
             SteamConnection.Connect();
@@ -23,6 +23,11 @@ namespace ZomBot
                 if (e.Message.IsMentioningMe())
                     ClientMentioned(s, e);
                 Command.CommandController(_client, e.Channel, e.Message.RawText, e.User.Id.ToString(), e.User);
+                if (e.Channel.IsPrivate)
+                {
+                    if (e.User.Name != "engi_valk")
+                        Console.WriteLine(e.User.Name + ": " + e.Message.RawText);
+                }
             };
             _client.ExecuteAndWait(async () =>
             {

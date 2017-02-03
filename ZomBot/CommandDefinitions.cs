@@ -10,6 +10,7 @@ namespace ZomBot
 {
     class CommandDefinitions
     {
+        static List<Tuple<string, int>> userRoll = new List<Tuple<string, int>>();
         internal static void CommandList(string _command, Channel _channel, DiscordClient _client, User _user, string _parameter = "100")
         {
             Random rnd = new Random();
@@ -65,6 +66,8 @@ namespace ZomBot
                         counter++;
                         if (lineNumber == counter)
                         {
+                            line = line.Replace("{{NAME}}", _user.Name);
+                            line = line.Replace("{{NICK}}", _user.Nickname);
                             _channel.SendMessage(line);
                         }
                     }
@@ -74,6 +77,28 @@ namespace ZomBot
 
                 case "!teststeam":
                     SteamConnection.testFunction(_parameter, _channel, _client, _user);
+                    break;
+
+
+                case "!rollLoot":   
+                      int lootRoll = rnd.Next(1, 1000);
+                    userRoll.Add(new Tuple<string, int>(_user.Name, lootRoll));
+                    _channel.SendMessage(_user.Name + " rolled a: " + lootRoll + ". Their result has been added to the list of potential winners!");
+                    break;
+
+                case "!printWinner":
+                    userRoll = userRoll.OrderByDescending(x => x.Item2).ToList();
+                    for (int i = 0; i < userRoll.Count; i++) {
+                        var tupleFromList = userRoll[i];
+                        if (i == 0)
+                        {
+                            _channel.SendMessage($"{tupleFromList.Item1} rolled {tupleFromList.Item2} and is our big winner!");
+                        }
+                        else
+                        {
+                            _channel.SendMessage($"{tupleFromList.Item1} rolled {tupleFromList.Item2}!");
+                        }
+                    }
                     break;
             }
         }
